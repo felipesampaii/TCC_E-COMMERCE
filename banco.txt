@@ -1,0 +1,114 @@
+create database tcc_ecommerce;
+
+use tcc_ecommerce;
+
+-- ------------------------------------------------------------------------------------------------------------------------------------ --
+
+-- drop database tcc_ecommerce;
+
+-- ------------------------------------------------------------------------------------------------------------------------------------ --
+
+--  pessoa 1 = fisica ou 2 = juridica
+create table pessoa(
+id_pessoa int auto_increment primary key,
+tipo_pessoa int,
+id_login int,
+foreign key (id_login) references loginn (id_login)
+);
+
+select * from pessoa;
+
+-- ------------------------------------------------------------------------------------------------------------------------------ --
+--  nesta tabela teremos os seguintes tipos de usuario: Clientes, ADM, e vendedor. (pessoa fisca e pessoa juridica são do tipo cliente)
+create table tipo_usuario(
+id_usuario int auto_increment primary key,
+tipo_usuario varchar(50),
+id_login int,
+foreign key (id_login) references loginn (id_login)
+);
+
+-- ------------------------------------------------------------------------------------------------------------------------------ --
+
+create table pessoa_fisica(
+id_pf int auto_increment primary key,
+nome_pf varchar(100) not null,
+sobrenome_pf varchar(100) not null,
+nascimento_pf date not null,
+cpf_pf char(11) not null,
+id_login int,
+foreign key (id_login) references loginn (id_login)
+);
+
+-- ------------------------------------------------------------------------------------------------------------------------------ --
+
+create table pessoa_juridica(
+id_pj int auto_increment primary key,
+nome_fantasia_pj varchar(100) not null,
+razao_social_pj varchar(100) not null,
+cnpj_pj char(14) not null,
+abertura_pj varchar(10) not null,
+funcionario_comprador_pj varchar(100) not null,
+id_login int,
+foreign key (id_login) references loginn (id_login)
+);
+
+create table endereco(
+id_endereco int auto_increment primary key,
+estado varchar(50) not null,
+cidade varchar(100) not null,
+bairro varchar(100) not null,
+cep varchar(10) not null,
+logradouro varchar(255) not null,
+numero varchar(20) not null,
+complemento varchar(100),
+id_login int,
+foreign key (id_login) references loginn (id_login)
+);
+
+select * from endereco;
+
+-- ----------------------------------------------------------------------------------------------------------------------------- --
+
+create table telefone(
+id_telefone int auto_increment primary key,
+ddd varchar(3) not null,
+numero varchar(11) not null,
+id_login int,
+foreign key (id_login) references loginn (id_login)
+);
+
+select * from telefone;
+
+-- -------------------------------------------------------------------------------------------------------------------------- --
+
+create table produto (
+id_produto int auto_increment primary key,
+nome_produto varchar(50) not null,
+descricao_produto varchar(1000) not null,
+preco_produto decimal(10, 2) not null,
+categoria_produto varchar(20) not null,
+pasta_imagem varchar(50) not null, -- Coluna para armazenar a pasta da imagem
+imagem_produto varchar(255),
+quantidade_produto int not null
+);
+
+insert into produto (nome_produto, descricao_produto, preco_produto, categoria_produto, pasta_imagem, imagem_produto, quantidade_produto)
+values -- Câmeras
+	   ('Câmera TP-Link', '<p> Resolução de vídeo 1080p (Full HD), visão panorâmica 360°, conectividade Wi-Fi, visão noturna, detecção de movimento. </p>', '289.90', 'Câmeras', 'camera', 'Tp-link.jpg', '50'),
+	   ('Câmera Arlo Ultra', '<p> Resolução 4K HDR, visão noturna avançada, detecção de movimento avançada e integração com assistentes de voz. </p>', '4698.00', 'Câmeras', 'camera','Arlo Ultra.jpg', '8'),
+       ('Câmera Amcrest ProHD', '<p> A Amcrest ProHD é uma câmera de segurança interna que oferece qualidade de vídeo em 1080p, visão noturna e detecção de movimento. Ela é conhecida por ser uma opção acessível com recursos sólidos. </p>', '1339.90', 'Câmeras', 'camera','Amcrest ProHD.jpg', '11'),
+       ('Câmera Axis Communications Q Series', '<p> A Axis é uma marca líder em câmeras de rede e oferece uma variedade de modelos com recursos de alta qualidade. </p>', '1908.49', 'Câmeras', 'camera','Axis Communications Q Series.jpg', '6'),
+       ('Câmera teste','<p> Não use isso como uma referencia meu querido', '99999.99', 'Câmeras', 'camera', 'Teste.jpg', '0');
+       
+insert into produto (nome_produto, descricao_produto, preco_produto, categoria_produto, pasta_imagem, imagem_produto, quantidade_produto)
+values -- Controle de acesso
+	   ('iCLASS SE', ' Este leitor de cartão inteligente oferece autenticação segura por meio de cartões de proximidade ou smartphones. Ele suporta várias tecnologias de cartão e oferece comunicações criptografadas para proteger contra ameaças de segurança. </p>', '599.90', 'Controle de acesso', 'controle de acesso','iCLASS SE.jpg', '20'),
+	   ('BioConnects Suprema BioStation 2', 'Um sistema de controle de acesso biométrico que utiliza reconhecimento de impressão digital avançado para autenticação. Ele é conhecido por sua velocidade e precisão na identificação de usuários. </p>', '3815.80', 'Controle de acesso', 'controle de acesso','BioConnects Suprema BioStation 2.jpg', '15'),
+       ('Axis Communications Network Door Controller', 'Este controlador de porta de rede permite a integração de câmeras de segurança, intercomunicadores e controle de acesso em um único sistema de segurança baseado em rede. </p>', '4199.99', 'Controle de acesso', 'controle de acesso', 'Axis Communications Network Door Controller.jpg', '20'),
+       ('Controle de acesso TESTE', 'TESTANDO', '9999.99', 'Controle de acesso', 'controle de acesso', 'Controle de acesso TESTE.jpg', '0');
+       
+       
+insert into produto (nome_produto, descricao_produto, preco_produto, categoria_produto, pasta_imagem, imagem_produto, quantidade_produto)
+values -- Sensores de ambiente
+	   ('Sensor de Presença para Iluminação', 'Esse é um sensor de presença', '1500.00','Sensor de presença','sensor de presença','Sensor de Presença para Iluminação.jpg','999'),
+       ('Sensor de presença  TESTE', 'TESTANDO', '9999.99', 'Sensor de presença','sensor de presença','Sensor de presença  TESTE.jpg','0');
