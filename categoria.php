@@ -1,38 +1,28 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Protector Kings</title>
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<!-------------------------------------------------------------------------------------------->
-  <style type = "text/css">
-    .navbar{ margin-bottom: 0; } /*STYLE --> tira a borda entre o menu e o texto */
-  </style>
-<!-------------------------------------------------------------------------------------------->
-</head>
-
-<body>
-  
-<?php  
+<?php
 include 'conexao.php';
-include 'menu.php';
-include 'carrossel.html';
 
-$consulta = $mysqli->query('select imagem_produto, nome_produto, preco_produto, quantidade_produto, pasta_imagem from produto');
+if (isset($_GET['cat'])) {
+    // A variável 'cat' está definida na URL (categoria.php)
+    $cat = $_GET['cat'];
+    // Execute o código relacionado à categoria aqui
+} 
+else {
+    header("Location: index.php"); // Redireciona para a página inicial
+    exit;
+}
+
+//variavel consulta  vai receber  variavel $mysql que é a variavel da conexão com o banco de dados na pg conexão.php
+$consulta = $mysqli->query("select imagem_produto, nome_produto, preco_produto, quantidade_produto, pasta_imagem from produto where categoria_produto = '$cat'");
 ?>
 
 <div class = "container-fluid">
   <div class = "row">
+  <?php include 'menu.php'; ?>
   <?php   while($exibe = $consulta->fetch_assoc()){  ?>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <div class = "col-sm-3">
       
       <img src="foto_produto/<?php echo $exibe['pasta_imagem']; ?>/<?php echo trim($exibe['imagem_produto']); ?>.jpg" class="img-responsive" style="width: 100%"> <!--TRIM remove todos os possiveis espaços que podem atrapalhar o código-->
@@ -66,10 +56,3 @@ $consulta = $mysqli->query('select imagem_produto, nome_produto, preco_produto, 
     <?php } ?>
   </div>
 </div>
-
-
-
-
-<?php include 'rodaPE.html'; ?>
-</body> 
-</html> 
