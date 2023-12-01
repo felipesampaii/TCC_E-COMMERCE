@@ -1,5 +1,6 @@
 <?php
 include 'conexao.php';
+include 'menu.php';
 
 if (isset($_GET['cat'])) {
     // A variável 'cat' está definida na URL (categoria.php)
@@ -15,14 +16,19 @@ else {
 $consulta = $mysqli->query("select imagem_produto, nome_produto, preco_produto, quantidade_produto, pasta_imagem from produto where categoria_produto = '$cat'");
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  
 <div class = "container-fluid">
   <div class = "row">
-  <?php include 'menu.php'; ?>
   <?php   while($exibe = $consulta->fetch_assoc()){  ?>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <div class = "col-sm-3">
       
       <img src="foto_produto/<?php echo $exibe['pasta_imagem']; ?>/<?php echo trim($exibe['imagem_produto']); ?>.jpg" class="img-responsive" style="width: 100%"> <!--TRIM remove todos os possiveis espaços que podem atrapalhar o código-->
@@ -37,22 +43,17 @@ $consulta = $mysqli->query("select imagem_produto, nome_produto, preco_produto, 
         </button>
       </div>
 
-      <div class="text-center" style="margin-top: 1.5%"; margin-bottom: 1%>
-        <?php if ($exibe['preco_produto'] > 0) { ?>
+      <?php include 'botao_esgotado.php'; ?>
 
-        <button class="btn btn-three">
-          <span class="glyphicon glyphicon-shopping-cart"> Comprar</span>
-        </button>
-
-        <?php } else { ?> 
-
-        <button class="btn btn-lg btn-block btn-danger" disabled>
-          <span class="glyphicon glyphicon-remove-circle"> Todos vendidos</span>
-        </button>
-
-        <?php } ?>
-      </div>
+      
     </div>
     <?php } ?>
   </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+ 

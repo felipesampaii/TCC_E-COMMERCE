@@ -46,29 +46,12 @@ $consulta = $mysqli->query('select imagem_produto, nome_produto, preco_produto, 
           <span class="glyphicon glyphicon-info-sign" style="Color: cadetblue"> Detalhes</span>
         </button>
       </div>
-
-      <div class="text-center" style="margin-top: 1.5%"; margin-bottom: 1%>
-        <?php if ($exibe['preco_produto'] > 0) { ?>
-
-        <button class="btn btn-three">
-          <span class="glyphicon glyphicon-shopping-cart"> Comprar</span>
-        </button>
-
-        <?php } else { ?> 
-
-        <button class="btn btn-lg btn-block btn-danger" disabled>
-          <span class="glyphicon glyphicon-remove-circle"> Todos vendidos</span>
-        </button>
-
-        <?php } ?>
-      </div>
+      <?php include 'botao_esgotado.php'; ?>
+      
     </div>
     <?php } ?>
   </div>
 </div>
-
-
-
 
 <?php include 'rodaPE.html'; ?>
 </body> 

@@ -76,8 +76,8 @@ include 'conexao.php';
         <input type="text" id="categoria_produto" name="categoria_produto" step="0.01" required><br><br>-->
         <label for="categoria">Categoria do produto</label>
         <select name="categoria_produto" id="categoria_produto">
-            <option>Controle de acesso</option>
             <option>Câmeras</option>
+            <option>Controle de acesso</option>
             <option>#</option>
             <option>#</option>
         <select></br></br> 
@@ -120,7 +120,8 @@ include 'conexao.php';
     
     // Fechar a conexão
     $mysqli->close();
-    ?>
-<?php include 'rodape.html'; ?>
+    
+include 'rodape.html'; 
+?>
 </body>
 </html>
