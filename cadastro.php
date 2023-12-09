@@ -1,79 +1,6 @@
-<?php
+<?php 
 include 'conexao.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Dados comuns para ambas as pessoas (pessoa e tipo_pessoa)
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
-    $tipo_pessoa = $_POST["tipo_pessoa"];
-
-    // Inserir dados na tabela pessoa
-    $sql = "INSERT INTO pessoa (email, senha, tipo_pessoa) VALUES ('$email', '$senha', $tipo_pessoa)";
-    $mysqli->query($sql);
-
-    // Obter o ID da pessoa recém-inserida
-    $id_pessoa = $mysqli->insert_id;
-
-    // Obter o ID da pessoa recém-inserida
-    $id_pessoa = $mysqli->insert_id;
-
-    // Inserir dados de telefone
-    if ($tipo_pessoa == 1) { // Pessoa Física
-        $telefone_pf_ddd = $_POST["telefone_pf_ddd"];
-        $telefone_pf_numero = $_POST["telefone_pf_numero"];
-
-        // Inserir dados na tabela telefone para Pessoa Física
-        $sql_telefone_pf = "INSERT INTO telefone (ddd, numero, id_pessoa)
-                            VALUES ('$telefone_pf_ddd', '$telefone_pf_numero', $id_pessoa)";
-        $mysqli->query($sql_telefone_pf);
-    } elseif ($tipo_pessoa == 2) { // Pessoa Jurídica
-        $telefone_pj_ddd = $_POST["telefone_pj_ddd"];
-        $telefone_pj_numero = $_POST["telefone_pj_numero"];
-
-        // Inserir dados na tabela telefone para Pessoa Jurídica
-        $sql_telefone_pj = "INSERT INTO telefone (ddd, numero, id_pessoa)
-                            VALUES ('$telefone_pj_ddd', '$telefone_pj_numero', $id_pessoa)";
-        $mysqli->query($sql_telefone_pj);
-    }
-
-    if ($tipo_pessoa == 1) { // Pessoa Física
-        $nome_pf = $_POST["nome_pf"];
-        $sobrenome_pf = $_POST["sobrenome_pf"];
-        $nascimento_pf = $_POST["nascimento_pf"];
-        $cpf_pf = $_POST["cpf_pf"];
-
-        // Inserir dados na tabela pessoa_fisica
-        $sql_pf = "INSERT INTO pessoa_fisica (nome_pf, sobrenome_pf, nascimento_pf, cpf_pf, id_pessoa)
-                    VALUES ('$nome_pf', '$sobrenome_pf', '$nascimento_pf', '$cpf_pf', $id_pessoa)";
-        $mysqli->query($sql_pf);
-    }
-     elseif ($tipo_pessoa == 2) { // Pessoa Jurídica
-        $nome_fantasia_pj = $_POST["nome_fantasia_pj"];
-        $razao_social_pj = $_POST["razao_social_pj"];
-        $cnpj_pj = $_POST["cnpj_pj"];
-        $abertura_pj = $_POST["abertura_pj"];
-        $funcionario_comprador_pj = $_POST["funcionario_comprador_pj"];
-
-        // Inserir dados na tabela pessoa_juridica
-        $sql_pj = "INSERT INTO pessoa_juridica (nome_fantasia_pj, razao_social_pj, cnpj_pj, abertura_pj, funcionario_comprador_pj, id_pessoa)
-                    VALUES ('$nome_fantasia_pj', '$razao_social_pj', '$cnpj_pj', '$abertura_pj', '$funcionario_comprador_pj', $id_pessoa)";
-        if(!$mysqli->query($sql_pj)){
-            $erroCadastro = true;
-        }
-    }
-
-    if ($erroCadastro) {
-        echo "Erro ao cadastrar os dados. Por favor, tente novamente.";
-    } else {
-        // Redirecionar para a página de login
-        header('Location: login.php');
-        exit;
-    }
-}
-else {
-    $erroCadastro = true;
-}
-
+include 'cadastro_if.php';
 ?>
 
 <!DOCTYPE html>
@@ -85,9 +12,14 @@ else {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="cadastro.css">
+
+     <script src="jquery.mask.js"></script>
+
 </head>
 
 <body>
+    
 <!------------------------------------------------------------------------------------------------->
 <!--Menu-->
 <div class="nav">
@@ -106,7 +38,7 @@ else {
         
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="login.php"><span> Login</a></li>
+            <?php  include 'session_start.php';?>
             <li><a href="contato.php">Contato</a></li>
         </ul>
         </div>
@@ -116,7 +48,7 @@ else {
 <!-------------------------------------------------------------------------------------------------->
 
     <h1>Criar conta</h1>
-    <form method="POST" action="">
+    <form method="POST" action="" onsubmit="return validarSenha();">
         <label>Tipo de Pessoa:</label></br>
         <input type="radio" name="tipo_pessoa" value="1" required onclick="showFields('pessoa_fisica_fields')"> Pessoa Física
         <input type="radio" name="tipo_pessoa" value="2" required onclick="showFields('pessoa_juridica_fields')"> Pessoa Jurídica<br>
@@ -138,6 +70,55 @@ else {
             <label for="telefone_pf">Telefone:</label>
             <input type="text" name="telefone_pf_ddd" placeholder="DDD" maxlength="3">
             <input type="text" name="telefone_pf_numero" placeholder="Número" maxlength="11"><br>
+
+            <label for="estado_pf">Estado:</label>
+            <select name="estado_pf">
+            <option value="AC">(AC)</option>
+                <option value="AL">(AL)</option>
+                <option value="AP">(AP)</option>
+                <option value="AM">(AM)</option>
+                <option value="BA">(BA)</option>
+                <option value="CE">(CE)</option>
+                <option value="DF">(DF)</option>
+                <option value="ES">(ES)</option>
+                <option value="GO">(GO)</option>
+                <option value="MA">(MA)</option>
+                <option value="MT">(MT)</option>
+                <option value="MS">(MS)</option>
+                <option value="MG">(MG)</option>
+                <option value="PA">(PA)</option>
+                <option value="PB">(PB)</option>
+                <option value="PR">(PR)</option>
+                <option value="PE">(PE)</option>
+                <option value="PI">(PI)</option>
+                <option value="RJ">(RJ)</option>
+                <option value="RN">(RN)</option>
+                <option value="RS">(RS)</option>
+                <option value="RO">(RO)</option>
+                <option value="RR">(RR)</option>
+                <option value="SC">(SC)</option>
+                <option value="SP">(SP)</option>
+                <option value="SE">(SE)</option>
+                <option value="TO">(TO)</option>
+            </select><br>
+
+            <label for="cidade_pf">Cidade:</label>
+            <input type="text" name="cidade_pf"><br>
+
+            <label for="bairro_pf">Bairro:</label>
+            <input type="text" name="bairro_pf"><br>
+
+            <label for="cep_pf">CEP:</label>
+            <input type="text" name="cep_pf"><br>
+
+            <label for="logradouro_pj">Logradouro:</label>
+            <input type="text" name="logradouro_pf"><br>
+
+            <label for="numero_pf">Número:</label>
+            <input type="text" name="numero_pf"><br>
+
+            <label for="complemento_pf">Complemento:</label>
+            <input type="text" name="complemento_pf" placeholder="Opcional"><br>
         </div>
 
         <!-- Campos específicos para Pessoa Jurídica -->
@@ -160,6 +141,55 @@ else {
             <label for="telefone_pj">Telefone:</label>
             <input type="text" name="telefone_pj_ddd" placeholder="DDD" maxlength="3">
             <input type="text" name="telefone_pj_numero" placeholder="Número" maxlength="11"><br>
+
+            <label for="estado_pj">Estado:</label>
+            <select name="estado_pj">
+                <option value="AC">(AC)</option>
+                <option value="AL">(AL)</option>
+                <option value="AP">(AP)</option>
+                <option value="AM">(AM)</option>
+                <option value="BA">(BA)</option>
+                <option value="CE">(CE)</option>
+                <option value="DF">(DF)</option>
+                <option value="ES">(ES)</option>
+                <option value="GO">(GO)</option>
+                <option value="MA">(MA)</option>
+                <option value="MT">(MT)</option>
+                <option value="MS">(MS)</option>
+                <option value="MG">(MG)</option>
+                <option value="PA">(PA)</option>
+                <option value="PB">(PB)</option>
+                <option value="PR">(PR)</option>
+                <option value="PE">(PE)</option>
+                <option value="PI">(PI)</option>
+                <option value="RJ">(RJ)</option>
+                <option value="RN">(RN)</option>
+                <option value="RS">(RS)</option>
+                <option value="RO">(RO)</option>
+                <option value="RR">(RR)</option>
+                <option value="SC">(SC)</option>
+                <option value="SP">(SP)</option>
+                <option value="SE">(SE)</option>
+                <option value="TO">(TO)</option>
+            </select><br>
+
+            <label for="cidade_pj">Cidade:</label>
+            <input type="text" name="cidade_pj"><br>
+
+            <label for="bairro_pj">Bairro:</label>
+            <input type="text" name="bairro_pj"><br>
+
+            <label for="cep_pj">CEP:</label>
+            <input type="text" name="cep_pj"><br>
+
+            <label for="logradouro_pj">Logradouro:</label>
+            <input type="text" name="logradouro_pj"><br>
+
+            <label for="numero_pj">Número:</label>
+            <input type="text" name="numero_pj"><br>
+
+            <label for="complemento_pj">Complemento:</label>
+            <input type="text" name="complemento_pj" placeholder="Opcional"><br>
         </div>
 
         <!-- Campos de email e senha (inicialmente ocultos) -->
@@ -169,12 +199,21 @@ else {
 
             <label for="senha">Senha:</label>
             <input type="password" name="senha" required><br>
+
+            <!--<label for="confirmar_senha">Confirmar Senha:</label>
+            <input type="password" name="confirmar_senha" id="confirmar_senha" required><br>-->
         </div>
 
         <input type="submit" value="Cadastrar" id="cadastrar" style="display: none;">
     </form>
 
     <script>
+        // a masca nao está funcionando.
+        //$(document).ready(function(){
+                //$("#cep_pf").mask("00 000-000");
+            //});
+
+
         // Função para mostrar/ocultar campos com base no tipo de pessoa selecionado
         function showFields(id) {
             // Oculta todos os campos
@@ -193,6 +232,18 @@ else {
                 document.getElementById('email_senha_fields').style.display = 'block';
             }
         }
+
+        //function validarSenha() {
+            //var senha = document.getElementById("senha").value;
+            //var confirmarSenha = document.getElementById("confirmar_senha").value;
+
+            //if (senha !== confirmarSenha) {
+                //alert("As senhas não coincidem. Por favor, verifique.");
+                //return false;
+            //}
+
+            //return true;
+        //}
     </script>
 <?php include 'rodape.html' ?>
 </body>

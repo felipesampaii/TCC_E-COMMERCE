@@ -17,15 +17,16 @@ $consulta = $mysqli->query("select imagem_produto, nome_produto, preco_produto, 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title><?php echo $cat?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+
 <body>
-  
+<h1 class="center-content"> <?php echo $cat ?></h1>
 <div class = "container-fluid">
   <div class = "row">
   <?php   while($exibe = $consulta->fetch_assoc()){  ?>
@@ -33,7 +34,7 @@ $consulta = $mysqli->query("select imagem_produto, nome_produto, preco_produto, 
       
       <img src="foto_produto/<?php echo $exibe['pasta_imagem']; ?>/<?php echo trim($exibe['imagem_produto']); ?>.jpg" class="img-responsive" style="width: 100%"> <!--TRIM remove todos os possiveis espaços que podem atrapalhar o código-->
 
-       <div><h4 style="text-align: center;"><b><?php echo mb_strimwidth($exibe['nome_produto'], 0, 30, '...'); ?></b></h4></div> <!--mb_strimwidth limita o tanto de caracteres que é visivel-->
+       <div><h4 style="text-align: center;"><b><?php echo mb_strimwidth($exibe['nome_produto'], 0, 25, '...'); ?></b></h4></div> <!--mb_strimwidth limita o tanto de caracteres que é visivel-->
 
       <div><h5 style="text-align: center;">R$ <?php echo number_format($exibe['preco_produto'], 2, ',','.'); ?></h5></div> <!--number_format faz com que o preço fique no formato padrão BR-->
       
@@ -52,8 +53,6 @@ $consulta = $mysqli->query("select imagem_produto, nome_produto, preco_produto, 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>
-
-
- 

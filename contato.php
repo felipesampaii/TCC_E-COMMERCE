@@ -14,6 +14,9 @@
 <?php  
 include 'conexao.php';
 ?>
+
+<!------------------------------------------------------------------------------------------------->
+<!--Menu-->
 <div class="nav">
     <nav class="navbar navbar-inverse"><!--Apague o inverse para estar alterando a cor do menu de navegação-->
     <div class="container-fluid"><!--Essa linha cria uma borda entre o menu e o texto-->
@@ -30,13 +33,15 @@ include 'conexao.php';
         
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="cadastro.php"><span> Cadastro</a></li>
-            <li><a href="login.php"><span> Login</a></li>
+            <?php  include 'session_start.php';?>
+            
         </ul>
         </div>
     </div>
     </nav>
 </div>
+<!------------------------------------------------------------------------------------------------->
+
 <h1>Estamos em manutenção na página de contato</h1>
 
 <?php include 'rodape.html' ?>
