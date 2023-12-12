@@ -14,6 +14,6 @@ if (mysqli_num_rows($validacao) == 1) { // faz a verificação se o usuario já 
    header('location:index.php');
 } 
 else {
-    header('location:erro_login.php');
+    header('location: erro_login.php');
 }   
 ?>

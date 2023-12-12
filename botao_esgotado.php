@@ -1,3 +1,8 @@
+
+
+<link rel="stylesheet" href="botao_comprar.css">
+
+
 <div class="text-center" style="margin-top: 1.5%"; margin-bottom: 1%>
         <?php if ($exibe['quantidade_produto'] > 0) { ?>
 

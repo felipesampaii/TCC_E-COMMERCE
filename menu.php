@@ -24,7 +24,7 @@
           <ul class="dropdown-menu">                  <!--Os itens Desing, Infra-estrutra, Dados e etc estão dentro de categorias-->
             <li><a href="categoria.php?cat=Câmeras">Câmera de segurança</a></li>
             <li><a href="categoria.php?cat=Controle de acesso">Controle de acesso</a></li>
-            <li><a href="categoria.php?cat=sensores de ambiente">Sensores ambientes</a></li>
+            <li><a href="categoria.php?cat=Sensor de presença">Sensor de presença</a></li>
             <li><a href="#">Sistemas de gravação de áudio</a></li>
           </ul>
           <!---------------------------------------------------------------------------------------------------------------------->

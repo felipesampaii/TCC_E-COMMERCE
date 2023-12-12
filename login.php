@@ -6,10 +6,7 @@
     <title>Login do Usuário</title>
     <link rel="stylesheet" href="login.css">
 	
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.main.js"></script>
-
+    <?php include 'links.php'; ?>
 
 </head>
 
@@ -55,6 +52,7 @@ include 'conexao.php';
 						<label for="email">Email</label>
 							<input name="txtemail" type="email" class="form-control" required id="email">
 					</div>
+					
 					<div class="form-group">
 						<label for="senha">Senha</label>
 						<input name="txtsenha" type="password" class="form-control" required id="senha">

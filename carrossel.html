@@ -7,8 +7,8 @@
     <script src='carrossel.js'></script>
     <style type="text/css">
         
-        .content{
-    height: 20vw;
+.content{
+    height: 28;
     width: 50vw;
     border-color: black;
     overflow: hidden; 
@@ -22,9 +22,13 @@
     height: 100%;
     width: 100%;
 }
-img{
-    transition: background 0.2s linear;
+img {
+    height: 28px;
+    width: 50vw;
+    max-height: 100%; /* Evita que a imagem fique maior que 28px de altura */
+    max-width: 357.14vw; /* Calculado com base na proporção original */
 }
+
 .navigation{   
     margin-left: 46%;
     bottom: 17vw;

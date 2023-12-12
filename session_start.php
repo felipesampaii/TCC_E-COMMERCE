@@ -7,8 +7,10 @@ if (empty($_SESSION['ID'])) { ?>
 <!--tudo que esta aqui dentro irá desaparecer quando o login for efetuado com sucesso-->
     <li><a href="cadastro.php"><span> Cadastro</span></a></li>
     <li><a href="login.php"><span> Login</span></a></li>
+    
 <?php   
-} else {
+} 
+else {
     if (isset($_SESSION['ID']) && !is_null($_SESSION['ID'])) {
         $consulta_usuario = $mysqli->query("SELECT pessoa.id_pessoa, pessoa_fisica.nome_pf
             FROM pessoa
@@ -18,14 +20,24 @@ if (empty($_SESSION['ID'])) { ?>
 
         if ($exibe_usuario !== null && isset($exibe_usuario['nome_pf'])) {
             ?>
-            <li><a href="#"><span class="glyphicon glyphicon-user"> <?php echo $exibe_usuario['nome_pf']; ?></span></a></li>
-            <li><a href="sair.php"><span class="glyphicon glyphicon-log-out"> Sair</span></a></li>
+            <li >
+                <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" ria-expanded="false">
+                    <?php echo $exibe_usuario['nome_pf']; ?></span><span class="caret"></span>
+                </a>
+                    <ul class="dropdown-menu">
+                    
+                        <li><a href="sair.php"><span class="glyphicon glyphicon-log-out"> Sair</span></a></li>
+                    </ul>
+            </li>
+
             <?php
-        } else {
+        } 
+        else {
             //redirecionar o usuário ou exibir uma mensagem de erro.
         }
-    } else {
+    } 
+    else {
         // Lidar com o caso em que $_SESSION['ID'] não está definido ou é nulo
     }
 }
-?>
+        ?>

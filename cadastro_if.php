@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tipo_usuario = "Tipo de usuário desconhecido"; // Pode ser uma mensagem de erro ou tratamento padrão.
     }
     
-    $sql = "INSERT INTO usuario(tipo_usuario, id_pessoa)
+    $sql = "INSERT INTO tipo_usuario(tipo_usuario, id_pessoa)
             VALUES ('$tipo_usuario', $id_pessoa)";
             
     $mysqli->query($sql);
