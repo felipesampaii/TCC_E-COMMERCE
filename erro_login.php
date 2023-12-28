@@ -1,47 +1,78 @@
 <!--Esse arquivo redireciona o usuario para uma mensagem de erro ao tentar fazer o login e dar errado-->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Protect King</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.main.js"></script>
+    <?php include 'links.php'; ?>
 
+	<style>
+	.navbar{
+		margin-bottom: 0;
+	}
+	.tent-erro{
+    background-color: #daa520;
+    color: white;
+		}
+		.fundo
+		{
+			width:100% ;
+			height: 30.6vw;
+		}
+	</style>
 </head>
+
 <body>
-	
+
+<?php
+	include 'conexao.php';
+?>
+
 <!------------------------------------------------------------------------------------------------->
 <!--Menu-->
 <div class="nav">
 	<nav class="navbar navbar-inverse"><!--Apague o inverse para estar alterando a cor do menu de navegação-->
-	<div class="container-fluid"><!--Essa linha cria uma borda entre o menu e o texto-->
-		
-		<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		<span class="sr-only">Toggle navigation</span>              <!--Esse é o botão hamburguer que aparece quando o site-->
-		<span class="icon-bar"></span>                              <!-- nao está em tela cheia-->
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-	</button>
-		<a class="navbar-brand" href="index.php">Protector Kings</a>
+		<div class="container-fluid"><!--Essa linha cria uma borda entre o menu e o texto-->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>              <!--Esse é o botão hamburguer que aparece quando o site-->
+					<span class="icon-bar"></span>                              <!-- nao está em tela cheia-->
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.php">Protect King</a>
+			</div>
+			
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="cadastro.php"><span> Cadastro</a></li>
+					<li><a href="login.php"><span> Login</a></li>
+					<li><a href="sobre_nos.php">Sobre nós</a></li>
+				</ul>
+			</div>
 		</div>
-		
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="cadastro.php"><span> Cadastro</a></li>
-			<li><a href="login.php"><span> Login</a></li>
-			<li><a href="contato.php">Contato</a></li>
-		</ul>
-		</div>
-	</div>
 	</nav>
 </div>
 <!------------------------------------------------------------------------------------------------->
+<div class="fundo">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-4 col-sm-offset-4 text-center">
 
-    <h1>Erro ao fazer o login</h1>
+		 	</br></br></br>
+			<h2>Email ou senha incorreto!</h2>
+
+			</br></br>
+			<a href="login.php" class="btn btn-block tent-erro" role="button">Tentar Novamente</a>
+			<!--<a href="esquecisenha.php" class="btn btn-block btn-primary" role="button">Esqueci a senha</a>-->
+		</div>
+	</div>
+</div>
+</div>
+	</br></br></br>
+<?php include 'rodape.html' ?>
 </body>
 </html>

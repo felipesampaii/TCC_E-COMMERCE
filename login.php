@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login do Usuário</title>
+    <title>Protect King</title>
+	
     <link rel="stylesheet" href="login.css">
 	
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.main.js"></script>
-
-
+	<?php include 'links.php'; ?>
+	<style>
+		.botao-entra{
+    background-color: #daa520;
+    color: white;
+		}
+		.botao-cads
+		{
+			background-color: white;
+			border-color: #daa520;
+			color: #daa520;
+			margin-left: 7vw;
+			margin-top: -4.9vw;
+		}
+		.botao-esq-senha
+		{
+			background-color: white;
+			border-color: #daa520;
+			color: #daa520;
+		}
+	</style>
+	
 </head>
 
 <body class="body">
-<?php  
-include 'conexao.php';
-?>
+
+<?php  include 'conexao.php'; ?>
 
 <!------------------------------------------------------------------------------------------------->
 <!--Menu-->
@@ -31,43 +48,54 @@ include 'conexao.php';
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	</button>
-		<a class="navbar-brand" href="index.php">Protector Kings</a>
+		<a class="navbar-brand" href="index.php">Protect King</a>
 		</div>
 		
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="cadastro.php"><span> Cadastro</a></li>
-			<li><a href="contato.php">Contato</a></li>
-		</ul>
+			<li><a href="sobre_nos.php">Sobre nós</a></li>
+		</ul> 
 		</div>
 	</div>
 	</nav>
 </div>
 <!------------------------------------------------------------------------------------------------->
 
-<div class="Conteiner">
+<div class="Conteiner" >
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-4 col-sm-offset-4">
-				<h2 class="LU">Login de Usuário</h2>
-				<form name="frmusuario" method="post" action="validacao_usuario.php">
+		<div class="bvvvxW">
+			<img src="foto_produto/logo/logo-coroa.svg" class="logo">
+			</br></br><h2 class="LU">Login de Usuário</h2></br></br>
+				<form name="frmusuario" method="post" action="validacao_usuario.php" id="entra">
 					<div class="form-group">
 						<label for="email">Email</label>
-							<input name="txtemail" type="email" class="form-control" required id="email">
+							<input name="txtemail" type="email" class="form-control" style="width:14vw;" required id="email">
 					</div>
+					
 					<div class="form-group">
 						<label for="senha">Senha</label>
 						<input name="txtsenha" type="password" class="form-control" required id="senha">
 					</div>
 						
-					<button type="submit" class="btn btn-lg btn-default">
+					<button type="submit" class="btn btn-lg botao-entra" >
 						<span> Entrar</span>
 					</button>
-				
-					<button type="submit" class="btn btn-lg btn-link">
-						<a href="cadastro.php">Cadastre-se</a>
+					</form>	
+					<a href="cadastro.php" >
+					<button  class="btn  btn-lg botao-cads " role="button"  >
+						Cadastre-se
 					</button>
-				</form>	
+					</a>
+				</br></br></br></br>
+				
+				<a href="esqueci_senha.php" >
+				<button  class="btn btn-lg botao-esq-senha" role="button"  >
+					Esqueci minha senha
+				</button>
+				</a>
+			</br>
+
 			</div>
 		</div>
 	</div>

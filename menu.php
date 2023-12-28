@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
       </button>
       <!------------------------------------------------------------------------------------------------------------------------>
-      <a class="navbar-brand" href="index.php">Protector Kings</a>
+      <a class="navbar-brand" href="index.php">Protect King</a>
     </div>
     
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -21,27 +21,26 @@
           <!---------------------------------------------------------------------------------------------------------------------->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" ria-expanded="false">Categoria <span class="caret"></span></a>
 
-          <ul class="dropdown-menu">                  <!--Os itens Desing, Infra-estrutra, Dados e etc estão dentro de categorias-->
+          <ul class="dropdown-menu">                 
             <li><a href="categoria.php?cat=Câmeras">Câmera de segurança</a></li>
             <li><a href="categoria.php?cat=Controle de acesso">Controle de acesso</a></li>
-            <li><a href="categoria.php?cat=sensores de ambiente">Sensores ambientes</a></li>
+            <li><a href="categoria.php?cat=Sensor de presença">Sensor de presença</a></li>
             <li><a href="#">Sistemas de gravação de áudio</a></li>
           </ul>
           <!---------------------------------------------------------------------------------------------------------------------->
         </li>
       </ul>
       <!----------------------------------------------------------------------------------------------------------------------->
-      <form class="navbar-form navbar-left" role="search">  
+      <form class="navbar-form navbar-left" role="search" name="busca" methodo="get"  action="busca.php">  
         <div class="form-group">    
-          <input type="text" class="form-control" placeholder="Buscar">                 <!--Barra de pesquisa-->
+          <input type="text" class="form-control" placeholder="Buscar" name="txtbuscar">                 <!--Barra de pesquisa-->
         </div>
         <button type="submit" class="btn btn-default">Pesquisar</button>
       </form>
       <!----------------------------------------------------------------------------------------------------------------------->
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="cadastrar_produto.php"><span> Cadastar produtos</a></li>
         <?php  include 'session_start.php';?>
-        <li><a href="contato.php">Contato</a></li>
+        <li><a href="sobre_nos.php">Sobre nós</a></li>
       </ul>
     </div>
   </div>
